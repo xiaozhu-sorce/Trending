@@ -1,10 +1,11 @@
 package com.bignerdranch.android.trending;
 
-import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.bignerdranch.android.trending.View.List.MainFragment;
+import com.bignerdranch.android.trending.View.List.TitleBar;
 import com.githang.statusbar.StatusBarCompat;
 
 public class MainActivity extends AppCompatActivity {
@@ -13,6 +14,10 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        getSupportFragmentManager().beginTransaction()
+                .add(R.id.main_container,new MainFragment(),"MainFragment")
+                .commit();
 
         StatusBarCompat.setStatusBarColor(this, 0xFAFAFA,true);
     }

@@ -1,11 +1,11 @@
-package com.bignerdranch.android.trending.View;
+package com.bignerdranch.android.trending.Model;
 
 public class User {
     private String Username;
     private String Reponame;
     private int imgID;
 
-    private User(int imgID,String username,String reponame){
+    public User(int imgID, String username, String reponame){
         this.imgID = imgID;
         this.Username = username;
         this.Reponame = reponame;
