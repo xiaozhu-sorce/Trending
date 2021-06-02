@@ -22,7 +22,7 @@ public interface ListDataSource {
         void onDataNotAvaliable();
     }
 
-    void getUserList(int Page, @NonNull LoadUserListCallback callback);
+    void getUserList( @NonNull LoadUserListCallback callback);
 
-    void getUser(int sid,String username,String Reponame,LoadUserCallback callback);
+    void getUser(String username,String Reponame,LoadUserCallback callback);
 }

@@ -18,8 +18,12 @@ public interface MainContract {
     }
 
     interface Presenter{
+        void start();
+
         void loadList(Context context,boolean isupdate);
 
         void setFliterType(FliterType fliterType);
+
+        void refreshUser();
     }
 }

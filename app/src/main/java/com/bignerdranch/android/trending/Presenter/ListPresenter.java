@@ -5,8 +5,10 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
+import com.bignerdranch.android.trending.Model.List.ListDataSource;
+import com.bignerdranch.android.trending.Model.List.ListRemoteDataSource;
+import com.bignerdranch.android.trending.Model.List.ListRepository;
 import com.bignerdranch.android.trending.Model.User;
-import com.bignerdranch.android.trending.R;
 import com.bignerdranch.android.trending.View.FliterType;
 
 import java.util.ArrayList;
@@ -15,14 +17,27 @@ import java.util.List;
 public class ListPresenter implements MainContract.Presenter{
     private final MainContract.View mView;
 
+    private ListRepository mListRepository;
+
     private FliterType mFliterType = FliterType.JAVA_PROGRESS;
 
     private List<User> mUserList1 = new ArrayList<>();
     private List<User> mUserList2 = new ArrayList<>();
     private List<User> mUserList3 = new ArrayList<>();
 
-    public ListPresenter(@NonNull MainContract.View mview){
+    public ListPresenter(@NonNull ListRepository listRepository, @NonNull MainContract.View mview){
         this.mView = mview;
+        this.mListRepository = listRepository;
+        mView.setPresenter(this);
+    }
+
+    public void GetInstance(){
+
+    }
+
+    @Override
+    public void start() {
+
     }
 
     @Override
@@ -30,15 +45,12 @@ public class ListPresenter implements MainContract.Presenter{
 
         switch (mFliterType){
             case JAVA_PROGRESS:
-                for (int i = 0 ;i < 20;i++){
-                    User zhu = new User(R.mipmap.user_profile,"xiaozhu-sorce","Trending");
-                    mUserList1.add(zhu);
-                }
-                mView.showUserList(mUserList1);
+
+//                mView.showUserList(mUserList1);
                 break;
             case C_PROGRESS:
                 for (int i = 0 ;i < 20;i++){
-                    User zhu = new User(R.mipmap.user_profile,"deng","Trending");
+                    User zhu = new User("deng","Trending");
                     mUserList2.add(zhu);
                 }
                 mView.showUserList(mUserList2);
@@ -46,7 +58,7 @@ public class ListPresenter implements MainContract.Presenter{
                 break;
             case PYTHON_PROGRESS:
                 for (int i = 0 ;i < 20;i++){
-                    User zhu = new User(R.mipmap.user_profile,"yuan","Trending");
+                    User zhu = new User("yuan","Trending");
                     mUserList3.add(zhu);
                 }
                 mView.showUserList(mUserList3);
@@ -54,11 +66,28 @@ public class ListPresenter implements MainContract.Presenter{
                 break;
         }
 
+        mListRepository.getUserList(new ListDataSource.LoadUserListCallback() {
+            @Override
+            public void onUserListLoaded(List<User> userList) {
+                mView.showUserList(userList);
+            }
+
+            @Override
+            public void onDataNotAvaliable() {
+
+            }
+        });
+
     }
 
     @Override
     public void setFliterType(FliterType fliterType) {
         mFliterType = fliterType;
+    }
+
+    @Override
+    public void refreshUser() {
+
     }
 
 

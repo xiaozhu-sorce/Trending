@@ -14,6 +14,9 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bignerdranch.android.trending.Model.List.ListDataSource;
+import com.bignerdranch.android.trending.Model.List.ListRemoteDataSource;
+import com.bignerdranch.android.trending.Model.List.ListRepository;
 import com.bignerdranch.android.trending.Model.User;
 import com.bignerdranch.android.trending.Presenter.ListPresenter;
 import com.bignerdranch.android.trending.Presenter.MainContract;
@@ -38,7 +41,13 @@ public class MainFragment extends Fragment implements MainContract.View {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mPresenter = new ListPresenter(this);
+        mPresenter = new ListPresenter(ListRepository.getINSTANCE(ListRemoteDataSource.getINSTANCE()),this);
+    }
+
+    @Override
+    public void onResume(){
+        super.onResume();
+        mPresenter.start();
     }
 
     @Nullable

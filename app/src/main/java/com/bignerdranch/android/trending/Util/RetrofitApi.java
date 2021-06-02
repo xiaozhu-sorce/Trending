@@ -2,14 +2,15 @@ package com.bignerdranch.android.trending.Util;
 
 import com.bignerdranch.android.trending.Model.GetListResponse;
 
-import java.util.Observable;
+import io.reactivex.Observable;
 
-import retrofit2.http.Body;
+import retrofit2.Call;
 import retrofit2.http.GET;
-import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 public interface RetrofitApi {
 
-    @GET("https://api.github.com/search/repositories?q={key}&per_page=20")
-    Observable<GetListResponse> getList(@Path("key") String key);
+    @GET("repo")
+    Call<GetListResponse> getList(@Query("lang") String lang , @Query("since") String since);
+
 }

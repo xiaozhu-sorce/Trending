@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bignerdranch.android.trending.Model.User;
 import com.bignerdranch.android.trending.R;
+import com.facebook.drawee.view.SimpleDraweeView;
 
 import java.util.List;
 
@@ -31,7 +32,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
 
     public class ViewHolder extends RecyclerView.ViewHolder{
 
-        private ImageView headimage;
+        private SimpleDraweeView headimage;
         private TextView username;
         private TextView reponame;
 
@@ -46,9 +47,9 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
     @Override
     public void onBindViewHolder(ViewHolder holder,int position) {
 
-        holder.headimage.setImageResource(UserList.get(position).getImgID());
-        holder.username.setText(UserList.get(position).getUsername());
-        holder.reponame.setText(UserList.get(position).getReponame());
+//        holder.headimage.setImageResource(UserList.get(position).getAvatars());
+        holder.username.setText(UserList.get(position).getRepo());
+        holder.reponame.setText(UserList.get(position).getLang());
 
     }
 
