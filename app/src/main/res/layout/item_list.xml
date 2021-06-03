@@ -11,12 +11,12 @@
         android:id="@+id/headimage"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:layout_marginStart="20dp"
-        app:placeholderImage="@mipmap/user_profile"
-        app:roundAsCircle="true"
+        android:layout_marginStart="16dp"
         app:layout_constraintBottom_toTopOf="@+id/hidden_list"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:placeholderImage="@mipmap/user_profile"
+        app:roundAsCircle="true" />
 
     <TextView
         android:id="@+id/Username"
@@ -35,10 +35,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="4dp"
         android:text="RepositoryName"
         android:textColor="@color/black"
-        android:textSize="15sp"
+        android:textSize="17sp"
         app:layout_constraintStart_toEndOf="@+id/headimage"
         app:layout_constraintTop_toBottomOf="@+id/Username" />
 
@@ -46,10 +46,42 @@
         android:id="@+id/hidden_list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="8dp"
         android:layout_marginBottom="5dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/Reponame">
+
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:layout_marginStart="20dp"
+            android:background="@drawable/ic_baseline_lens_24"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/line1" />
+
+        <ImageView
+            android:id="@+id/imageView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="25dp"
+            android:background="@drawable/ic_baseline_star_rate_24"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/line1" />
+
+
+        <ImageView
+            android:id="@+id/imageView4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="50dp"
+            android:background="@drawable/ic_baseline_insights_24"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/line1" />
 
         <LinearLayout
             android:id="@+id/line1"
@@ -69,38 +101,6 @@
                 android:text="desc" />
 
         </LinearLayout>
-
-        <ImageView
-            android:id="@+id/imageView2"
-            android:layout_width="18dp"
-            android:layout_height="18dp"
-            android:layout_marginStart="20dp"
-            android:background="@drawable/ic_baseline_lens_24"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/line1" />
-
-
-        <ImageView
-            android:id="@+id/imageView3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="25dp"
-            android:background="@drawable/ic_baseline_star_rate_24"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/line1" />
-
-        <ImageView
-            android:id="@+id/imageView4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="50dp"
-            android:background="@drawable/ic_baseline_insights_24"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/line1" />
 
         <TextView
             android:id="@+id/stars"
