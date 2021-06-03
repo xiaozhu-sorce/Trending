@@ -24,6 +24,5 @@ public interface MainContract {
 
         void setFliterType(FliterType fliterType);
 
-        void refreshUser();
     }
 }

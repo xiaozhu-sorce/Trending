@@ -5,7 +5,9 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewStub;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -43,6 +45,10 @@ public class MainFragment extends Fragment implements MainContract.View {
 
     private TitleBar mTitleBar;
 
+    private ViewStub viewStub;
+
+    private Button mRetry;
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,6 +67,8 @@ public class MainFragment extends Fragment implements MainContract.View {
         View root = inflater.inflate(R.layout.mainfragment, container, false);
 
         Fresco.initialize(getContext());
+
+        viewStub = root.findViewById(R.id.view_stub);
 
         mRefreshLayout = root.findViewById(R.id.refresh);
 
@@ -135,6 +143,20 @@ public class MainFragment extends Fragment implements MainContract.View {
 
     @Override
     public void showError() {
-        Toast.makeText(getContext(), "您的网络状态不佳哦～～～", Toast.LENGTH_LONG).show();
+        View view;
+        try {
+            view = viewStub.inflate();
+            mRetry = view.findViewById(R.id.retry);
+        } catch (Exception e) {
+            viewStub.setVisibility(View.VISIBLE);
+        } finally {
+            if (mRetry != null) {
+                mRetry.setOnClickListener(view1 -> {
+                    mPresenter.loadList(getContext(),true);
+                    viewStub.setVisibility(View.GONE);
+                    Toast.makeText(getContext(), "i'm trying!", Toast.LENGTH_SHORT).show();
+                });
+            }
+        }
     }
 }

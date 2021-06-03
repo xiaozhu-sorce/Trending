@@ -77,47 +77,33 @@ public class ListPresenter implements MainContract.Presenter{
                 });
                 break;
             case C_PROGRESS:
-                mListRepository.getC_UserList("C","weekly",new ListDataSource.LoadUserListCallback() {
-                    @Override
-                    public void onUserListLoaded(List<User> userList) {
-                        C_ListToShow.clear();
-                        C_ListToShow.addAll(userList);
-                        mView.showUserList(C_ListToShow);
-                    }
-
-                    @Override
-                    public void onDataNotAvaliable() {
-                        mView.showError();
-                    }
-                });
+                show(C_ListToShow,"C","weekly");
                 break;
             case PYTHON_PROGRESS:
-                mListRepository.getC_UserList("Python","weekly",new ListDataSource.LoadUserListCallback() {
-                    @Override
-                    public void onUserListLoaded(List<User> userList) {
-                        P_ListToShow.clear();
-                        P_ListToShow.addAll(userList);
-                        mView.showUserList(P_ListToShow);
-                    }
-
-                    @Override
-                    public void onDataNotAvaliable() {
-                        mView.showError();
-                    }
-                });
+                show(P_ListToShow,"Python","weekly");
                 break;
         }
+    }
+
+    private void show(List<User> userList,String lang,String since){
+        mListRepository.getC_UserList(lang,since,new ListDataSource.LoadUserListCallback() {
+            @Override
+            public void onUserListLoaded(List<User> userList) {
+                userList.clear();
+                userList.addAll(userList);
+                mView.showUserList(userList);
+            }
+
+            @Override
+            public void onDataNotAvaliable() {
+                mView.showError();
+            }
+        });
     }
 
     @Override
     public void setFliterType(FliterType fliterType) {
         mFliterType = fliterType;
     }
-
-    @Override
-    public void refreshUser() {
-
-    }
-
 
 }
