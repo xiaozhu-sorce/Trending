@@ -77,7 +77,7 @@ public class ListPresenter implements MainContract.Presenter{
                 });
                 break;
             case C_PROGRESS:
-                mListRepository.getC_UserList(new ListDataSource.LoadUserListCallback() {
+                mListRepository.getC_UserList("C","weekly",new ListDataSource.LoadUserListCallback() {
                     @Override
                     public void onUserListLoaded(List<User> userList) {
                         C_ListToShow.clear();
@@ -92,7 +92,7 @@ public class ListPresenter implements MainContract.Presenter{
                 });
                 break;
             case PYTHON_PROGRESS:
-                mListRepository.getP_UserList(new ListDataSource.LoadUserListCallback() {
+                mListRepository.getC_UserList("Python","weekly",new ListDataSource.LoadUserListCallback() {
                     @Override
                     public void onUserListLoaded(List<User> userList) {
                         P_ListToShow.clear();

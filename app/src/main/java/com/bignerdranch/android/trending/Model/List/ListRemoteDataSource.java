@@ -68,12 +68,7 @@ public class ListRemoteDataSource implements ListDataSource{
     }
 
     @Override
-    public void getUser(String username, String Reponame, LoadUserCallback callback) {
-
-    }
-
-    @Override
-    public void getC_UserList(@NonNull LoadUserListCallback callback) {
+    public void getC_UserList(String lang,String since,@NonNull LoadUserListCallback callback) {
 
         List<User> cuserList = new ArrayList<>();
 
@@ -84,7 +79,7 @@ public class ListRemoteDataSource implements ListDataSource{
                 .build()
                 .create(RetrofitApi.class);
 
-        api.getLanList("C","weekly").subscribeOn(Schedulers.io())
+        api.getLanList(lang,since).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<GetListResponse>() {
                     @Override
@@ -114,46 +109,46 @@ public class ListRemoteDataSource implements ListDataSource{
                 });
     }
 
-    @Override
-    public void getP_UserList(@NonNull LoadUserListCallback callback) {
-        List<User> puserList = new ArrayList<>();
-
-        RetrofitApi api = new Retrofit.Builder()
-                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                .addConverterFactory(GsonConverterFactory.create())
-                .baseUrl("https://trendings.herokuapp.com/")
-                .build()
-                .create(RetrofitApi.class);
-
-        api.getLanList("Python","weely")
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<GetListResponse>() {
-                    @Override
-                    public void onSubscribe(@io.reactivex.annotations.NonNull Disposable d) {
-
-                    }
-
-                    @Override
-                    public void onNext(@io.reactivex.annotations.NonNull GetListResponse getListResponse) {
-                        for (GetListResponse.ItemsBean itemsBean : getListResponse.getItems()){
-                            puserList.add(new User(itemsBean.getRepo(),itemsBean.getDesc(),
-                                    itemsBean.getLang(),
-                                    itemsBean.getStars(),
-                                    itemsBean.getForks(),itemsBean.getAvatars()));
-                        }
-                    }
-
-                    @Override
-                    public void onError(@io.reactivex.annotations.NonNull Throwable e) {
-                        callback.onDataNotAvaliable();
-                    }
-
-                    @Override
-                    public void onComplete() {
-                        callback.onUserListLoaded(puserList);
-                    }
-                });
-
-    }
+//    @Override
+//    public void getP_UserList(@NonNull LoadUserListCallback callback) {
+//        List<User> puserList = new ArrayList<>();
+//
+//        RetrofitApi api = new Retrofit.Builder()
+//                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+//                .addConverterFactory(GsonConverterFactory.create())
+//                .baseUrl("https://trendings.herokuapp.com/")
+//                .build()
+//                .create(RetrofitApi.class);
+//
+//        api.getLanList("Python","weely")
+//                .subscribeOn(Schedulers.io())
+//                .observeOn(AndroidSchedulers.mainThread())
+//                .subscribe(new Observer<GetListResponse>() {
+//                    @Override
+//                    public void onSubscribe(@io.reactivex.annotations.NonNull Disposable d) {
+//
+//                    }
+//
+//                    @Override
+//                    public void onNext(@io.reactivex.annotations.NonNull GetListResponse getListResponse) {
+//                        for (GetListResponse.ItemsBean itemsBean : getListResponse.getItems()){
+//                            puserList.add(new User(itemsBean.getRepo(),itemsBean.getDesc(),
+//                                    itemsBean.getLang(),
+//                                    itemsBean.getStars(),
+//                                    itemsBean.getForks(),itemsBean.getAvatars()));
+//                        }
+//                    }
+//
+//                    @Override
+//                    public void onError(@io.reactivex.annotations.NonNull Throwable e) {
+//                        callback.onDataNotAvaliable();
+//                    }
+//
+//                    @Override
+//                    public void onComplete() {
+//                        callback.onUserListLoaded(puserList);
+//                    }
+//                });
+//
+//    }
 }
