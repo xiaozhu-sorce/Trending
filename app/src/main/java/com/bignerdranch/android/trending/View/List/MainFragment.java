@@ -13,6 +13,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.bignerdranch.android.trending.Model.List.ListDataSource;
 import com.bignerdranch.android.trending.Model.List.ListRemoteDataSource;
@@ -22,6 +23,8 @@ import com.bignerdranch.android.trending.Presenter.ListPresenter;
 import com.bignerdranch.android.trending.Presenter.MainContract;
 import com.bignerdranch.android.trending.R;
 import com.bignerdranch.android.trending.View.FliterType;
+import com.bignerdranch.android.trending.View.MyRefreshLayout;
+import com.facebook.drawee.backends.pipeline.Fresco;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,6 +38,8 @@ public class MainFragment extends Fragment implements MainContract.View {
     private List<User> userlist = new ArrayList<>();
 
     private MainContract.Presenter mPresenter;
+
+    private MyRefreshLayout mRefreshLayout;
 
     private TitleBar mTitleBar;
 
@@ -55,7 +60,29 @@ public class MainFragment extends Fragment implements MainContract.View {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.mainfragment, container, false);
 
+        Fresco.initialize(getContext());
+
+        mRefreshLayout = root.findViewById(R.id.refresh);
+
+        mRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                mPresenter.loadList(getContext(),true);
+            }
+        });
+
+        mRefreshLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mRefreshLayout.isRefreshing()){
+                    mRefreshLayout.setLoading(false);
+                    Toast.makeText(getContext(), "已停止更新", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
         mAdapter = new ListAdapter(userlist);
+
         recyclerView = root.findViewById(R.id.main_rv);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setAdapter(mAdapter);
@@ -103,10 +130,11 @@ public class MainFragment extends Fragment implements MainContract.View {
         recyclerView.scrollToPosition(0);
         LinearLayoutManager mLayoutManager = (LinearLayoutManager) recyclerView.getLayoutManager();
         mLayoutManager.scrollToPositionWithOffset(0, 0);
+        mRefreshLayout.setRefreshing(false);
     }
 
     @Override
     public void showError() {
-        Toast.makeText(getContext(), "失败辽", Toast.LENGTH_LONG).show();
+        Toast.makeText(getContext(), "您的网络状态不佳哦～～～", Toast.LENGTH_LONG).show();
     }
 }

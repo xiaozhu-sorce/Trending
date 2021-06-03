@@ -21,18 +21,14 @@ public class ListPresenter implements MainContract.Presenter{
 
     private FliterType mFliterType = FliterType.JAVA_PROGRESS;
 
-    private List<User> mUserList1 = new ArrayList<>();
-    private List<User> mUserList2 = new ArrayList<>();
-    private List<User> mUserList3 = new ArrayList<>();
+    private List<User> Java_ListToShow = new ArrayList<>();
+    private List<User> C_ListToShow = new ArrayList<>();
+    private List<User> P_ListToShow = new ArrayList<>();
 
     public ListPresenter(@NonNull ListRepository listRepository, @NonNull MainContract.View mview){
         this.mView = mview;
         this.mListRepository = listRepository;
         mView.setPresenter(this);
-    }
-
-    public void GetInstance(){
-
     }
 
     @Override
@@ -43,41 +39,74 @@ public class ListPresenter implements MainContract.Presenter{
     @Override
     public void loadList(Context context, boolean isupdate) {
 
+        Java_ListToShow = new ArrayList<>();
+
         switch (mFliterType){
             case JAVA_PROGRESS:
-
-//                mView.showUserList(mUserList1);
+                mView.showUserList(Java_ListToShow);
+                showData();
                 break;
             case C_PROGRESS:
-                for (int i = 0 ;i < 20;i++){
-                    User zhu = new User("deng","Trending");
-                    mUserList2.add(zhu);
-                }
-                mView.showUserList(mUserList2);
-                Toast.makeText(context, "CCC", Toast.LENGTH_LONG).show();
+                mView.showUserList(C_ListToShow);
+                showData();
                 break;
             case PYTHON_PROGRESS:
-                for (int i = 0 ;i < 20;i++){
-                    User zhu = new User("yuan","Trending");
-                    mUserList3.add(zhu);
-                }
-                mView.showUserList(mUserList3);
-                Toast.makeText(context, "python", Toast.LENGTH_LONG).show();
+                mView.showUserList(P_ListToShow);
+                showData();
                 break;
         }
 
-        mListRepository.getUserList(new ListDataSource.LoadUserListCallback() {
-            @Override
-            public void onUserListLoaded(List<User> userList) {
-                mView.showUserList(userList);
-            }
+    }
 
-            @Override
-            public void onDataNotAvaliable() {
+    private void showData(){
+        switch (mFliterType){
+            case JAVA_PROGRESS:
+                mListRepository.getJ_UserList(new ListDataSource.LoadUserListCallback() {
 
-            }
-        });
+                    @Override
+                    public void onUserListLoaded(List<User> userList) {
+                        Java_ListToShow.clear();
+                        Java_ListToShow.addAll(userList);
+                        mView.showUserList(Java_ListToShow);
+                    }
 
+                    @Override
+                    public void onDataNotAvaliable() {
+                        mView.showError();
+                    }
+                });
+                break;
+            case C_PROGRESS:
+                mListRepository.getC_UserList(new ListDataSource.LoadUserListCallback() {
+                    @Override
+                    public void onUserListLoaded(List<User> userList) {
+                        C_ListToShow.clear();
+                        C_ListToShow.addAll(userList);
+                        mView.showUserList(C_ListToShow);
+                    }
+
+                    @Override
+                    public void onDataNotAvaliable() {
+                        mView.showError();
+                    }
+                });
+                break;
+            case PYTHON_PROGRESS:
+                mListRepository.getP_UserList(new ListDataSource.LoadUserListCallback() {
+                    @Override
+                    public void onUserListLoaded(List<User> userList) {
+                        P_ListToShow.clear();
+                        P_ListToShow.addAll(userList);
+                        mView.showUserList(P_ListToShow);
+                    }
+
+                    @Override
+                    public void onDataNotAvaliable() {
+                        mView.showError();
+                    }
+                });
+                break;
+        }
     }
 
     @Override

@@ -15,14 +15,17 @@ public class User {
      * avatars : ["https://avatars.githubusercontent.com/u/45662650?s=40&v=4","https://avatars.githubusercontent.com/u/77636146?s=40&v=4","https://avatars.githubusercontent.com/u/13003926?s=40&v=4","https://avatars.githubusercontent.com/u/83913879?s=40&v=4","https://avatars.githubusercontent.com/u/3529834?s=40&v=4"]
      */
 
+    private String user;
     private String repo;
     private String lang;
     private String stars;
     private String forks;
+    private String desc;
     private List<String> avatars;
 
-    public User(String repo,String lang,String stars,String forks,List<String> avatars){
+    public User(String repo,String desc,String lang,String stars,String forks,List<String> avatars){
         this.repo = repo;
+        this.desc = desc;
         this.lang = lang;
         this.stars = stars;
         this.forks = forks;
@@ -32,6 +35,23 @@ public class User {
     public User(String repo,String lang){
         this.repo = repo;
         this.lang = lang;
+    }
+
+    public String getUser() {
+
+        return user;
+    }
+
+    public void setUser(String user) {
+        this.user = user;
+    }
+
+    public String getDesc() {
+        return desc;
+    }
+
+    public void setDesc(String desc) {
+        this.desc = desc;
     }
 
     public String getRepo() {

@@ -45,7 +45,16 @@ public class GetListResponse {
         private String lang;
         private String stars;
         private String forks;
+        private String desc;
         private List<String> avatars;
+
+        public String getDesc() {
+            return desc;
+        }
+
+        public void setDesc(String desc) {
+            this.desc = desc;
+        }
 
         public String getRepo() {
             return repo;
