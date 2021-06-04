@@ -19,7 +19,7 @@ public class ListPresenter implements MainContract.Presenter{
 
     private ListRepository mListRepository;
 
-    private FliterType mFliterType = FliterType.JAVA_PROGRESS;
+    private FliterType mFliterType;
 
     private List<User> Java_ListToShow = new ArrayList<>();
     private List<User> C_ListToShow = new ArrayList<>();
@@ -38,8 +38,6 @@ public class ListPresenter implements MainContract.Presenter{
 
     @Override
     public void loadList(Context context, boolean isupdate) {
-
-        Java_ListToShow = new ArrayList<>();
 
         switch (mFliterType){
             case JAVA_PROGRESS:
@@ -85,12 +83,12 @@ public class ListPresenter implements MainContract.Presenter{
         }
     }
 
-    private void show(List<User> userList,String lang,String since){
+    private void show(List<User> List,String lang,String since){
         mListRepository.getC_UserList(lang,since,new ListDataSource.LoadUserListCallback() {
             @Override
             public void onUserListLoaded(List<User> userList) {
-                userList.clear();
-                userList.addAll(userList);
+                List.clear();
+                List.addAll(userList);
                 mView.showUserList(userList);
             }
 
