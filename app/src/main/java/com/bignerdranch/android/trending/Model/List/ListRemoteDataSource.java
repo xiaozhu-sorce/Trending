@@ -26,8 +26,6 @@ public class ListRemoteDataSource implements ListDataSource{
 
     private static ListRemoteDataSource INSTANCE;
 
-    private List<GetListResponse.ItemsBean> userList = new ArrayList<>();
-
     public static ListRemoteDataSource getINSTANCE(){
         if (INSTANCE == null){
             INSTANCE = new ListRemoteDataSource();
@@ -51,10 +49,12 @@ public class ListRemoteDataSource implements ListDataSource{
             public void onResponse(Call<GetListResponse> call, Response<GetListResponse> response) {
 
                 for (GetListResponse.ItemsBean itemsBean : response.body().getItems()){
-                    muserList.add(new User(itemsBean.getRepo(),itemsBean.getDesc(),
+                    muserList.add(new User(itemsBean.getRepo(),
+                            itemsBean.getDesc(),
                             itemsBean.getLang(),
                             itemsBean.getStars(),
-                            itemsBean.getForks(),itemsBean.getAvatars()));
+                            itemsBean.getForks(),
+                            itemsBean.getAvatars()));
                 }
 
                 callback.onUserListLoaded(muserList);
@@ -62,13 +62,13 @@ public class ListRemoteDataSource implements ListDataSource{
 
             @Override
             public void onFailure(Call<GetListResponse> call, Throwable t) {
-
+                callback.onDataNotAvaliable();
             }
         });
     }
 
     @Override
-    public void getC_UserList(String lang,String since,@NonNull LoadUserListCallback callback) {
+    public void getLanUserList(String lang,String since,@NonNull LoadUserListCallback callback) {
 
         List<User> cuserList = new ArrayList<>();
 
@@ -90,10 +90,12 @@ public class ListRemoteDataSource implements ListDataSource{
                     @Override
                     public void onNext(@io.reactivex.annotations.NonNull GetListResponse getListResponse) {
                         for (GetListResponse.ItemsBean itemsBean : getListResponse.getItems()){
-                            cuserList.add(new User(itemsBean.getRepo(),itemsBean.getDesc(),
+                            cuserList.add(new User(itemsBean.getRepo(),
+                                    itemsBean.getDesc(),
                                     itemsBean.getLang(),
                                     itemsBean.getStars(),
-                                    itemsBean.getForks(),itemsBean.getAvatars()));
+                                    itemsBean.getForks(),
+                                    itemsBean.getAvatars()));
                         }
                     }
 
@@ -108,47 +110,4 @@ public class ListRemoteDataSource implements ListDataSource{
                     }
                 });
     }
-
-//    @Override
-//    public void getP_UserList(@NonNull LoadUserListCallback callback) {
-//        List<User> puserList = new ArrayList<>();
-//
-//        RetrofitApi api = new Retrofit.Builder()
-//                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-//                .addConverterFactory(GsonConverterFactory.create())
-//                .baseUrl("https://trendings.herokuapp.com/")
-//                .build()
-//                .create(RetrofitApi.class);
-//
-//        api.getLanList("Python","weely")
-//                .subscribeOn(Schedulers.io())
-//                .observeOn(AndroidSchedulers.mainThread())
-//                .subscribe(new Observer<GetListResponse>() {
-//                    @Override
-//                    public void onSubscribe(@io.reactivex.annotations.NonNull Disposable d) {
-//
-//                    }
-//
-//                    @Override
-//                    public void onNext(@io.reactivex.annotations.NonNull GetListResponse getListResponse) {
-//                        for (GetListResponse.ItemsBean itemsBean : getListResponse.getItems()){
-//                            puserList.add(new User(itemsBean.getRepo(),itemsBean.getDesc(),
-//                                    itemsBean.getLang(),
-//                                    itemsBean.getStars(),
-//                                    itemsBean.getForks(),itemsBean.getAvatars()));
-//                        }
-//                    }
-//
-//                    @Override
-//                    public void onError(@io.reactivex.annotations.NonNull Throwable e) {
-//                        callback.onDataNotAvaliable();
-//                    }
-//
-//                    @Override
-//                    public void onComplete() {
-//                        callback.onUserListLoaded(puserList);
-//                    }
-//                });
-//
-//    }
 }

@@ -63,10 +63,12 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
     @Override
     public void onBindViewHolder(ViewHolder holder,int position) {
         String [] repo = UserList.get(position).getRepo().split("/");
-        List<String> ava = UserList.get(position).getAvatars();
-        Uri uri =  Uri.parse(ava.get(0));
 
-        holder.headimage.setImageURI(uri);
+        List<String> ava = UserList.get(position).getAvatars();
+        if (ava != null && ava.size()>0){
+            Uri uri =  Uri.parse(ava.get(0));
+            holder.headimage.setImageURI(uri);
+        }
         holder.username.setText(repo[0]);
         holder.reponame.setText(repo[1]);
         holder.desc.setText(UserList.get(position).getDesc());

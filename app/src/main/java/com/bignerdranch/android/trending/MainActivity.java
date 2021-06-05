@@ -5,7 +5,6 @@ import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.bignerdranch.android.trending.View.List.MainFragment;
-import com.bignerdranch.android.trending.View.List.TitleBar;
 import com.githang.statusbar.StatusBarCompat;
 
 public class MainActivity extends AppCompatActivity {

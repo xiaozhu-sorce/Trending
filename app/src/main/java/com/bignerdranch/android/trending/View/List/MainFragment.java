@@ -8,7 +8,6 @@ import android.view.ViewGroup;
 import android.view.ViewStub;
 import android.widget.AdapterView;
 import android.widget.Button;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -17,7 +16,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
-import com.bignerdranch.android.trending.Model.List.ListDataSource;
 import com.bignerdranch.android.trending.Model.List.ListRemoteDataSource;
 import com.bignerdranch.android.trending.Model.List.ListRepository;
 import com.bignerdranch.android.trending.Model.User;
@@ -26,6 +24,7 @@ import com.bignerdranch.android.trending.Presenter.MainContract;
 import com.bignerdranch.android.trending.R;
 import com.bignerdranch.android.trending.View.FliterType;
 import com.bignerdranch.android.trending.View.MyRefreshLayout;
+
 import com.facebook.drawee.backends.pipeline.Fresco;
 
 import java.util.ArrayList;
@@ -75,7 +74,7 @@ public class MainFragment extends Fragment implements MainContract.View {
         mRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                mPresenter.loadList(getContext(),true);
+                mPresenter.loadList(getContext());
             }
         });
 
@@ -84,7 +83,6 @@ public class MainFragment extends Fragment implements MainContract.View {
             public void onClick(View v) {
                 if (mRefreshLayout.isRefreshing()){
                     mRefreshLayout.setLoading(false);
-                    Toast.makeText(getContext(), "已停止更新", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -105,15 +103,15 @@ public class MainFragment extends Fragment implements MainContract.View {
                 switch (position) {
                     case 0:
                         mPresenter.setFliterType(FliterType.JAVA_PROGRESS);
-                        mPresenter.loadList(getContext(),true);
+                        mPresenter.loadList(getContext());
                         break;
                     case 1:
                         mPresenter.setFliterType(FliterType.C_PROGRESS);
-                        mPresenter.loadList(getContext(),true);
+                        mPresenter.loadList(getContext());
                         break;
                     case 2:
                         mPresenter.setFliterType(FliterType.PYTHON_PROGRESS);
-                        mPresenter.loadList(getContext(),true);
+                        mPresenter.loadList(getContext());
                         break;
                 }
             }
@@ -152,9 +150,8 @@ public class MainFragment extends Fragment implements MainContract.View {
         } finally {
             if (mRetry != null) {
                 mRetry.setOnClickListener(view1 -> {
-                    mPresenter.loadList(getContext(),true);
+                    mPresenter.loadList(getContext());
                     viewStub.setVisibility(View.GONE);
-                    Toast.makeText(getContext(), "i'm trying!", Toast.LENGTH_SHORT).show();
                 });
             }
         }

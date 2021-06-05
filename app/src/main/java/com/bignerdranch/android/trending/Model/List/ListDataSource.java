@@ -17,7 +17,5 @@ public interface ListDataSource {
 
     void getJ_UserList( @NonNull LoadUserListCallback callback);
 
-    void getC_UserList(String lang,String since,@NonNull LoadUserListCallback callback);
-
-//    void getP_UserList(@NonNull LoadUserListCallback callback);
+    void getLanUserList(String lang, String since, @NonNull LoadUserListCallback callback);
 }

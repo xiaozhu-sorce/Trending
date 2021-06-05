@@ -15,9 +15,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ListPresenter implements MainContract.Presenter{
+
     private final MainContract.View mView;
 
-    private ListRepository mListRepository;
+    private final ListRepository mListRepository;
 
     private FliterType mFliterType;
 
@@ -37,7 +38,7 @@ public class ListPresenter implements MainContract.Presenter{
     }
 
     @Override
-    public void loadList(Context context, boolean isupdate) {
+        public void loadList(Context context) {
 
         switch (mFliterType){
             case JAVA_PROGRESS:
@@ -84,7 +85,7 @@ public class ListPresenter implements MainContract.Presenter{
     }
 
     private void show(List<User> List,String lang,String since){
-        mListRepository.getC_UserList(lang,since,new ListDataSource.LoadUserListCallback() {
+        mListRepository.getLanUserList(lang,since,new ListDataSource.LoadUserListCallback() {
             @Override
             public void onUserListLoaded(List<User> userList) {
                 List.clear();

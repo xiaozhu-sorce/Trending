@@ -25,13 +25,8 @@ public class ListRepository implements ListDataSource{
     }
 
     @Override
-    public void getC_UserList(String lang,String since,@NonNull LoadUserListCallback callback) {
-        mListDataSource.getC_UserList(lang,since,callback);
+    public void getLanUserList(String lang,String since,@NonNull LoadUserListCallback callback) {
+        mListDataSource.getLanUserList(lang,since,callback);
     }
-
-//    @Override
-//    public void getP_UserList(@NonNull LoadUserListCallback callback) {
-//        mListDataSource.getP_UserList(callback);
-//    }
 
 }

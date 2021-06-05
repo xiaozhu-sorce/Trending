@@ -20,7 +20,7 @@ public interface MainContract {
     interface Presenter{
         void start();
 
-        void loadList(Context context,boolean isupdate);
+        void loadList(Context context);
 
         void setFliterType(FliterType fliterType);
 
