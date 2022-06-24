@@ -5,92 +5,119 @@ import java.util.List;
 public class User {
 
     /**
-     * repo : CyberPunkMetalHead/Binance-volatility-trading-bot
-     * repo_link : https://github.com/CyberPunkMetalHead/Binance-volatility-trading-bot
-     * desc : This is a fully functioning Binance trading bot that measures the volatility of every coin on Binance and places trades with the highest gaining coins If you like this project consider donating though the Brave browser to allow me to continuously improve the script.
-     * lang : Python
-     * stars : 1,982
-     * forks : 349
-     * added_stars : 139 stars today
-     * avatars : ["https://avatars.githubusercontent.com/u/45662650?s=40&v=4","https://avatars.githubusercontent.com/u/77636146?s=40&v=4","https://avatars.githubusercontent.com/u/13003926?s=40&v=4","https://avatars.githubusercontent.com/u/83913879?s=40&v=4","https://avatars.githubusercontent.com/u/3529834?s=40&v=4"]
+     * rank : 1
+     * username : alibaba
+     * repositoryName : COLA
+     * url : https://github.com/alibaba/COLA
+     * description : 🥤COLA: Clean Object-oriented & Layered Architecture
+     * language : Java
+     * languageColor : #b07219
+     * totalStars : 7557
+     * forks : 2079
+     * starsSince : 106
+     * since : weekly
+     * builtBy : [{"username":"oldratlee","url":"https://github.com/oldratlee","avatar":"https://avatars.githubusercontent.com/u/1063891?s=40&v=4"},{"username":"significantfrank","url":"https://github.com/significantfrank","avatar":"https://avatars.githubusercontent.com/u/8212932?s=40&v=4"},{"username":"sinopower","url":"https://github.com/sinopower","avatar":"https://avatars.githubusercontent.com/u/33787?s=40&v=4"},{"username":"apps/dependabot","url":"https://github.com/apps/dependabot","avatar":"https://avatars.githubusercontent.com/in/29110?s=40&v=4"},{"username":"xyz0001","url":"https://github.com/xyz0001","avatar":"https://avatars.githubusercontent.com/u/46206436?s=40&v=4"}]
      */
 
-    private String user;
-    private String repo;
-    private String lang;
-    private String stars;
-    private String forks;
-    private String desc;
-    private List<String> avatars;
+    private String username;
+    private String repositoryName;
+    private String language;
+    private int totalStars;
+    private int forks;
+    private String description;
+    private String url;
+    /**
+     * username : oldratlee
+     * url : https://github.com/oldratlee
+     * avatar : https://avatars.githubusercontent.com/u/1063891?s=40&v=4
+     */
 
-    public User(String repo,String desc,String lang,String stars,String forks,List<String> avatars){
-        this.repo = repo;
-        this.desc = desc;
-        this.lang = lang;
-        this.stars = stars;
+    private List<BuiltByBean> builtBy;
+
+    public User(String username, String repositoryName, String language, int totalStars, int forks, String description, String url, List<BuiltByBean> builtBy) {
+        this.username = username;
+        this.repositoryName = repositoryName;
+        this.language = language;
+        this.totalStars = totalStars;
         this.forks = forks;
-        this.avatars = avatars;
+        this.description = description;
+        this.url = url;
+        this.builtBy = builtBy;
     }
 
-    public User(String repo,String lang){
-        this.repo = repo;
-        this.lang = lang;
+    public String getUsername() {
+        return username;
     }
 
-    public String getUser() {
-
-        return user;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
-    public void setUser(String user) {
-        this.user = user;
+    public String getRepositoryName() {
+        return repositoryName;
     }
 
-    public String getDesc() {
-        return desc;
+    public void setRepositoryName(String repositoryName) {
+        this.repositoryName = repositoryName;
     }
 
-    public void setDesc(String desc) {
-        this.desc = desc;
+    public String getUrl() {
+        return url;
     }
 
-    public String getRepo() {
-        return repo;
+    public void setUrl(String url) {
+        this.url = url;
     }
 
-    public void setRepo(String repo) {
-        this.repo = repo;
+    public String getDescription() {
+        return description;
     }
 
-    public String getLang() {
-        return lang;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
-    public void setLang(String lang) {
-        this.lang = lang;
+    public String getLanguage() {
+        return language;
     }
 
-    public String getStars() {
-        return stars;
+    public void setLanguage(String language) {
+        this.language = language;
     }
 
-    public void setStars(String stars) {
-        this.stars = stars;
+    public int getTotalStars() {
+        return totalStars;
     }
 
-    public String getForks() {
+    public void setTotalStars(int totalStars) {
+        this.totalStars = totalStars;
+    }
+
+    public int getForks() {
         return forks;
     }
 
-    public void setForks(String forks) {
+    public void setForks(int forks) {
         this.forks = forks;
     }
 
-    public List<String> getAvatars() {
-        return avatars;
+    public List<BuiltByBean> getBuiltBy() {
+        return builtBy;
     }
 
-    public void setAvatars(List<String> avatars) {
-        this.avatars = avatars;
+    public void setBuiltBy(List<BuiltByBean> builtBy) {
+        this.builtBy = builtBy;
+    }
+
+    public static class BuiltByBean {
+        private String avatar;
+
+        public String getAvatar() {
+            return avatar;
+        }
+
+        public void setAvatar(String avatar) {
+            this.avatar = avatar;
+        }
     }
 }

@@ -4,7 +4,6 @@ import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -13,8 +12,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bignerdranch.android.trending.Model.User;
 import com.bignerdranch.android.trending.R;
-import com.facebook.drawee.backends.pipeline.Fresco;
-import com.facebook.drawee.interfaces.DraweeController;
 import com.facebook.drawee.view.SimpleDraweeView;
 
 import java.util.List;
@@ -62,27 +59,23 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(ViewHolder holder,int position) {
-        String [] repo = UserList.get(position).getRepo().split("/");
 
-        List<String> ava = UserList.get(position).getAvatars();
+        List<User.BuiltByBean> ava = UserList.get(position).getBuiltBy();
         if (ava != null && ava.size()>0){
-            Uri uri =  Uri.parse(ava.get(0));
+            Uri uri =  Uri.parse(ava.get(0).getAvatar());
             holder.headimage.setImageURI(uri);
         }
-        holder.username.setText(repo[0]);
-        holder.reponame.setText(repo[1]);
-        holder.desc.setText(UserList.get(position).getDesc());
-        holder.lang.setText(UserList.get(position).getLang());
-        holder.stars.setText(UserList.get(position).getStars());
-        holder.forks.setText(UserList.get(position).getForks());
+        holder.username.setText(UserList.get(position).getUsername());
+        holder.reponame.setText(UserList.get(position).getRepositoryName());
+        holder.desc.setText(UserList.get(position).getDescription());
+        holder.lang.setText(UserList.get(position).getLanguage());
+        holder.stars.setText(String.valueOf(UserList.get(position).getTotalStars()));
+        holder.forks.setText(String.valueOf(UserList.get(position).getForks()));
         holder.mConstraintLayout.setVisibility(View.GONE);
         holder.mLayout.setOnClickListener(new View.OnClickListener() {
-
             boolean flag = false;
-
             @Override
             public void onClick(View v) {
-
                 if (!flag){
                     holder.mConstraintLayout.setVisibility(View.GONE);
                     flag = true;

@@ -20,17 +20,8 @@ public class GetListResponse {
      * added_stars : 139 stars today
      * avatars : ["https://avatars.githubusercontent.com/u/45662650?s=40&v=4","https://avatars.githubusercontent.com/u/77636146?s=40&v=4","https://avatars.githubusercontent.com/u/13003926?s=40&v=4","https://avatars.githubusercontent.com/u/83913879?s=40&v=4","https://avatars.githubusercontent.com/u/3529834?s=40&v=4"]
      */
-    private int count;
-    
+
     private List<ItemsBean> items;
-
-    public int getCount() {
-        return count;
-    }
-
-    public void setCount(int count) {
-        this.count = count;
-    }
 
     public List<ItemsBean> getItems() {
         return items;
@@ -41,59 +32,78 @@ public class GetListResponse {
     }
 
     public static class ItemsBean {
-        private String repo;
-        private String lang;
-        private String stars;
-        private String forks;
-        private String desc;
-        private List<String> avatars;
+        private String username;
+        private String repositoryName;
+        private String language;
+        private int totalStars;
+        private int forks;
+        private String description;
+        private String url;
 
-        public String getDesc() {
-            return desc;
+        private List<User.BuiltByBean> builtBy;
+
+        public String getUsername() {
+            return username;
         }
 
-        public void setDesc(String desc) {
-            this.desc = desc;
+        public void setUsername(String username) {
+            this.username = username;
         }
 
-        public String getRepo() {
-            return repo;
+        public String getRepositoryName() {
+            return repositoryName;
         }
 
-        public void setRepo(String repo) {
-            this.repo = repo;
+        public void setRepositoryName(String repositoryName) {
+            this.repositoryName = repositoryName;
         }
 
-        public String getLang() {
-            return lang;
+        public String getLanguage() {
+            return language;
         }
 
-        public void setLang(String lang) {
-            this.lang = lang;
+        public void setLanguage(String language) {
+            this.language = language;
         }
 
-        public String getStars() {
-            return stars;
+        public int getTotalStars() {
+            return totalStars;
         }
 
-        public void setStars(String stars) {
-            this.stars = stars;
+        public void setTotalStars(int totalStars) {
+            this.totalStars = totalStars;
         }
 
-        public String getForks() {
+        public int getForks() {
             return forks;
         }
 
-        public void setForks(String forks) {
+        public void setForks(int forks) {
             this.forks = forks;
         }
 
-        public List<String> getAvatars() {
-            return avatars;
+        public String getDescription() {
+            return description;
         }
 
-        public void setAvatars(List<String> avatars) {
-            this.avatars = avatars;
+        public void setDescription(String description) {
+            this.description = description;
+        }
+
+        public String getUrl() {
+            return url;
+        }
+
+        public void setUrl(String url) {
+            this.url = url;
+        }
+
+        public List<User.BuiltByBean> getBuiltBy() {
+            return builtBy;
+        }
+
+        public void setBuiltBy(List<User.BuiltByBean> builtBy) {
+            this.builtBy = builtBy;
         }
     }
 }

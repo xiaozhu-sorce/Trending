@@ -15,6 +15,8 @@ public interface MainContract {
         void showUserList(List<User> userList);
 
         void showError();
+
+        void hideKeletonScreen();
     }
 
     interface Presenter{

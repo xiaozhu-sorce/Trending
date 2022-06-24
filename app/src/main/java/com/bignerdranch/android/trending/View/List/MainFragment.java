@@ -25,6 +25,8 @@ import com.bignerdranch.android.trending.R;
 import com.bignerdranch.android.trending.View.FliterType;
 import com.bignerdranch.android.trending.View.MyRefreshLayout;
 
+import com.ethanhua.skeleton.RecyclerViewSkeletonScreen;
+import com.ethanhua.skeleton.Skeleton;
 import com.facebook.drawee.backends.pipeline.Fresco;
 
 import java.util.ArrayList;
@@ -47,6 +49,8 @@ public class MainFragment extends Fragment implements MainContract.View {
     private ViewStub viewStub;
 
     private Button mRetry;
+
+    private RecyclerViewSkeletonScreen skeletonScreen;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -114,6 +118,10 @@ public class MainFragment extends Fragment implements MainContract.View {
                         mPresenter.loadList(getContext());
                         break;
                 }
+                skeletonScreen = Skeleton.bind(recyclerView)
+                        .adapter(mAdapter)
+                        .load(R.layout.item_skeleton)
+                        .show();
             }
 
             @Override
@@ -155,5 +163,10 @@ public class MainFragment extends Fragment implements MainContract.View {
                 });
             }
         }
+    }
+
+    @Override
+    public void hideKeletonScreen() {
+        skeletonScreen.hide();
     }
 }

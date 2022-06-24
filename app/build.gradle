@@ -55,4 +55,8 @@ dependencies {
     implementation "androidx.recyclerview:recyclerview-selection:1.1.0"
 
     implementation 'com.githang:status-bar-compat:latest.integration'
+
+    //Skeleton骨架屏
+    implementation 'com.ethanhua:skeleton:1.1.2'
+    implementation 'io.supercharge:shimmerlayout:2.1.0'
 }

@@ -1,12 +1,10 @@
 package com.bignerdranch.android.trending.Presenter;
 
 import android.content.Context;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
 import com.bignerdranch.android.trending.Model.List.ListDataSource;
-import com.bignerdranch.android.trending.Model.List.ListRemoteDataSource;
 import com.bignerdranch.android.trending.Model.List.ListRepository;
 import com.bignerdranch.android.trending.Model.User;
 import com.bignerdranch.android.trending.View.FliterType;
@@ -66,6 +64,7 @@ public class ListPresenter implements MainContract.Presenter{
                     public void onUserListLoaded(List<User> userList) {
                         Java_ListToShow.clear();
                         Java_ListToShow.addAll(userList);
+                        mView.hideKeletonScreen();
                         mView.showUserList(Java_ListToShow);
                     }
 
@@ -76,20 +75,21 @@ public class ListPresenter implements MainContract.Presenter{
                 });
                 break;
             case C_PROGRESS:
-                show(C_ListToShow,"C","weekly");
+                show(C_ListToShow,"c","weekly");
                 break;
             case PYTHON_PROGRESS:
-                show(P_ListToShow,"Python","weekly");
+                show(P_ListToShow,"python","weekly");
                 break;
         }
     }
 
-    private void show(List<User> List,String lang,String since){
-        mListRepository.getLanUserList(lang,since,new ListDataSource.LoadUserListCallback() {
+    private void show(List<User> List,String lan,String since){
+        mListRepository.getLanUserList(lan,since,new ListDataSource.LoadUserListCallback() {
             @Override
             public void onUserListLoaded(List<User> userList) {
                 List.clear();
                 List.addAll(userList);
+                mView.hideKeletonScreen();
                 mView.showUserList(userList);
             }
 
